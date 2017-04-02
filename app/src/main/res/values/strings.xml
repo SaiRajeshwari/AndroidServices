@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">AndroidServices</string>
+    <string name="services_app">Services App</string>
+    <string name="pdf_download_activity">PDFs Download Activity</string>
+    <string name="close">Close</string>
+    <string name="app_desc">The purpose of the App is to study the role of Android System in
+    creating and managing the lifecycle of Bound and Started Services.</string>
+    <string name="start_download">Start Download</string>
+    <string name="pdf_desc">Please provide list of five SJSU PDFs to download.</string>
+
+    <string name="pdf_one_file_location">PDF1 File Location:</string>
+    <string name="pdf_two_file_location">PDF2 File Location:</string>
+    <string name="pdf_three_file_location">PDF3 File Location:</string>
+    <string name="pdf_four_file_location">PDF4 File Location:</string>
+    <string name="pdf_five_file_location">PDF5 File Location:</string>
+
+    <string name="pdf_one">http://www.cisco.com/c/dam/en_us/about/annual-report/2016-annual-report-full.pdf</string>
+    <string name="pdf_two">http://www.cisco.com/web/about/ac79/docs/innov/IoE_Economy.pdf</string>
+    <string name="pdf_three">http://www.cisco.com/web/strategy/docs/gov/everything-for-cities.pdf</string>
+    <string name="pdf_four">http://www.cisco.com/web/offer/gist_ty2_asset/Cisco_2014_ASR.pdf</string>
+    <string name="pdf_five">http://www.cisco.com/web/offer/emear/38586/images/Presentations/P3.pdf</string>
+</resources>
