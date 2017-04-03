@@ -2,8 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.rajee.androidservices">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -20,9 +21,9 @@
         <activity android:name=".PDFDownloadActivity" />
 
         <service
-            android:name=".LocalBoundService"
-            android:enabled="true"
-            android:exported="true"></service>
-    </application>
+            android:name=".StartedIntentService"
+            android:exported="false"></service>
 
+
+    </application>
 </manifest>
