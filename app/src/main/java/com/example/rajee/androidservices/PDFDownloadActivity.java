@@ -21,15 +21,21 @@ public class PDFDownloadActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pdfdownload);
 
+        final String book_one = ((TextView) findViewById(R.id.pdf_one)).getText().toString();
+        final String book_two = ((TextView) findViewById(R.id.pdf_two)).getText().toString();
+        final String book_three = ((TextView) findViewById(R.id.pdf_three)).getText().toString();
+        final String book_four = ((TextView) findViewById(R.id.pdf_four)).getText().toString();
+        final String book_five = ((TextView) findViewById(R.id.pdf_five)).getText().toString();
+
         Button btnStartDownload = (Button) findViewById(R.id.start_download);
         btnStartDownload.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 if(bound == true){
                     int num = myBoundService.getRandomNumber();
-                    String bo = myBoundService.getBookName();
-                    //Toast.makeText(PDFDownloadActivity.this, "Bound: " + num, Toast.LENGTH_SHORT).show();
-                    Toast.makeText(PDFDownloadActivity.this, "Bound: " + bo, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PDFDownloadActivity.this, "Bound: " + num, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PDFDownloadActivity.this, "book_one: " + book_one, Toast.LENGTH_SHORT).show();
+                    myBoundService.downloadFiles(book_one, book_two, book_three, book_four, book_five);
                 }
             }
         });
@@ -55,7 +61,6 @@ public class PDFDownloadActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         Intent intent = new Intent(this, LocalBoundService.class);
-        intent.putExtra("book_one", ((TextView) findViewById(R.id.pdf_one)).getText().toString());
         bindService(intent, bConnection, getApplicationContext().BIND_AUTO_CREATE);
     }
 
