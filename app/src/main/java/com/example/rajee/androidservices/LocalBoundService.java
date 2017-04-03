@@ -38,7 +38,7 @@ public class LocalBoundService extends Service {
 
     public void downloadFiles(String... urlStr){
         BackTask backTask = new BackTask();
-        backTask.execute(urlStr[0]);
+        backTask.execute(urlStr);
     }
 
 
@@ -60,43 +60,51 @@ public class LocalBoundService extends Service {
 
         @Override
         protected Void doInBackground(String... params) {
+            HttpURLConnection conn;
+            String path;
+            String filename;
+            String writePath;
+            int lengthOfFile;
+            byte data[];
             InputStream is = null;
             FileOutputStream fos = null;
             int count;
-            try{
-                URL url = new URL(params[0]);
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                is = conn.getInputStream();
-                String path = url.getPath();
-                String filename = path.substring(path.lastIndexOf('/')+1);
-                String writePath = Environment.getExternalStorageDirectory() + "/" + filename;
-                Log.v("Write Path: ", writePath);
-                fos = new FileOutputStream(writePath);
-                int lengthOfFile = conn.getContentLength();
-                byte data[] = new byte[1024];
-                while((count = is.read(data)) != -1){
-                    fos.write(data, 0, count);
+            for(int i=0; i<params.length; i++){
+                try{
+                    URL url = new URL(params[i]);
+                    conn = (HttpURLConnection) url.openConnection();
+                    is = conn.getInputStream();
+                    path = url.getPath();
+                    filename = path.substring(path.lastIndexOf('/')+1);
+                    writePath = Environment.getExternalStorageDirectory() + "/" + filename;
+                    Log.v("Write Path: ", writePath);
+                    fos = new FileOutputStream(writePath);
+                    lengthOfFile = conn.getContentLength();
+                    data = new byte[1024];
+                    while((count = is.read(data)) != -1){
+                        fos.write(data, 0, count);
+                    }
+                    fos.flush();
                 }
-                fos.flush();
-            }
-            catch (Exception e){
-                e.printStackTrace();
-            }
-            finally {
-                if(is != null){
-                    try{
-                        is.close();
-                    }
-                    catch (IOException e){
-                        e.printStackTrace();
-                    }
+                catch (Exception e){
+                    e.printStackTrace();
                 }
-                if(fos != null){
-                    try{
-                        fos.close();
+                finally {
+                    if(is != null){
+                        try{
+                            is.close();
+                        }
+                        catch (IOException e){
+                            e.printStackTrace();
+                        }
                     }
-                    catch (IOException e){
-                        e.printStackTrace();
+                    if(fos != null){
+                        try{
+                            fos.close();
+                        }
+                        catch (IOException e){
+                            e.printStackTrace();
+                        }
                     }
                 }
             }
