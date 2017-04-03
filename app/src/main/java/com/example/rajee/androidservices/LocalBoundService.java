@@ -14,25 +14,20 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Random;
 
 public class LocalBoundService extends Service {
 
     private final IBinder sBinder = new LocalBinder();
-    private final Random sRandomGenerator = new Random();
-    private String book_one;
-    private String book_two;
-    private String book_three;
-    private String book_four;
-    private String book_five;
 
     @Override
     public IBinder onBind(Intent intent) {
         return sBinder;
     }
 
-    public int getRandomNumber(){
-        return sRandomGenerator.nextInt();
+    @Override
+    public boolean onUnbind(Intent intent) {
+        Toast.makeText(LocalBoundService.this, "UNBINDING", Toast.LENGTH_LONG).show();
+        return super.onUnbind(intent);
     }
 
 
@@ -64,7 +59,6 @@ public class LocalBoundService extends Service {
             String path;
             String filename;
             String writePath;
-            int lengthOfFile;
             byte data[];
             InputStream is = null;
             FileOutputStream fos = null;
@@ -79,7 +73,6 @@ public class LocalBoundService extends Service {
                     writePath = Environment.getExternalStorageDirectory() + "/" + filename;
                     Log.v("Write Path: ", writePath);
                     fos = new FileOutputStream(writePath);
-                    lengthOfFile = conn.getContentLength();
                     data = new byte[1024];
                     while((count = is.read(data)) != -1){
                         fos.write(data, 0, count);
@@ -114,7 +107,6 @@ public class LocalBoundService extends Service {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            Toast.makeText(LocalBoundService.this, "Download finished", Toast.LENGTH_LONG).show();
         }
     }
 

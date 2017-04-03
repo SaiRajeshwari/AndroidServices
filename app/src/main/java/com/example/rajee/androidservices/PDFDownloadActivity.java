@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class PDFDownloadActivity extends AppCompatActivity {
 
@@ -32,9 +31,6 @@ public class PDFDownloadActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(bound == true){
-                    int num = myBoundService.getRandomNumber();
-                    Toast.makeText(PDFDownloadActivity.this, "Bound: " + num, Toast.LENGTH_SHORT).show();
-                    Toast.makeText(PDFDownloadActivity.this, "book_one: " + book_one, Toast.LENGTH_SHORT).show();
                     myBoundService.downloadFiles(book_one, book_two, book_three, book_four, book_five);
                 }
             }
@@ -73,4 +69,8 @@ public class PDFDownloadActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }
